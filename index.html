@@ -1,149 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catatan Pribadi dengan Enkripsi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aplikasi Catatan Pribadi dengan Enkripsi</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        body {
-            font-family: 'Playfair Display', serif;
-            background-color: #F5EFE7;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #FFFFFF;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border: 1px solid #D8C4B6;
-        }
-        h2 {
-            font-family: 'Libre Baskerville', serif;
-            font-size: 24px;
-            color: #213555;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        textarea {
-            width: 96%;
-            height: 150px;
-            margin-bottom: 10px;
-            font-family: 'Playfair Display', serif;
-            font-size: 16px;
-            border: 1px solid #3E5879;
-            border-radius: 4px;
-            padding: 10px;
-        }
-        textarea::placeholder {
-            font-family: 'Playfair Display', serif;
-            color: #3E5879;
-        }
-        input[type="password"] {
-            width: calc(100% - 20px);
-            padding: 8px;
-            margin-bottom: 10px;
-            font-family: 'Playfair Display', serif;
-            font-size: 16px;
-            border: 1px solid #3E5879;
-            border-radius: 4px;
-            color: #213555;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #213555;
-            color: #FFFFFF;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: 'Playfair Display', serif;
-        }
-        button:hover {
-            background-color: #3E5879;
-        }
-        .output {
-            background: #D8C4B6;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 4px;
-            word-wrap: break-word;
-            color: #213555;
-        }
-        .hint {
-            font-size: 14px;
-            color: #3E5879;
-            margin-bottom: 10px;
-        }
+      body {
+        font-family: "Playfair Display", serif;
+        background-color: #f5efe7;
+        margin: 0;
+        padding: 20px;
+      }
+      .maincontainer {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 900px;
+        margin: 0 auto;
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border: 1px solid #d8c4b6;
+      }
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 900px;
+        margin: 0 auto;
+        background: #ffffff;
+        
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border: 1px solid #d8c4b6;
+      }
+      .column {
+        flex: 1;
+        margin: 10px;
+        padding: 10px;
+        border-radius: 8px;
+        background: #fdfbf6;
+      }
+      h2 {
+        font-family: "Libre Baskerville", serif;
+        font-size: 22px;
+        color: #213555;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .hint {
+        margin-left: 40px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        color: #3e5879;
+        line-height: 1.6;
+      }
+      textarea,
+      input[type="password"] {
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 10px;
+        font-family: "Playfair Display", serif;
+        font-size: 16px;
+        border: 1px solid #3e5879;
+        border-radius: 4px;
+      }
+      textarea::placeholder,
+      input::placeholder {
+        color: #3e5879;
+      }
+      button {
+        width: 97%;
+        padding: 10px;
+        background-color: #213555;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: "Playfair Display", serif;
+      }
+      button:hover {
+        background-color: #3e5879;
+      }
+      .output,
+      .encrypted {
+        background: #d8c4b6;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 4px;
+        word-wrap: break-word;
+        color: #213555;
+      }
+      .note-item {
+        margin-bottom: 10px;
+        padding: 10px;
+        background: #ffffff;
+        border: 1px solid #d8c4b6;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .note-code {
+        font-family: "Libre Baskerville", serif;
+        font-weight: bold;
+        color: #213555;
+      }
+      .note-item button {
+        padding: 5px 10px;
+        font-size: 14px;
+        background-color: #213555;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+      }
+      .note-item button:hover {
+        background-color: #3e5879;
+      }
+      /* Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+      .modal-content {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        width: 300px;
+        text-align: center;
+      }
+      .modal-content input {
+        margin-bottom: 10px;
+      }
+      .modal-content button {
+        width: 100%;
+      }
     </style>
-</head>
-<body>
-    <div class="container">
+  </head>
+  <body>
+    <div class="maincontainer">
+      <div style="width: 100%">
         <h2>Aplikasi Catatan Pribadi dengan Enkripsi</h2>
-        <div class="hint">Petunjuk:
-            <ul>
-                <li>Tulis catatan Anda di kotak yang tersedia.</li>
-                <li>Masukkan kunci enkripsi yang mudah diingat namun aman.</li>
-                <li>Gunakan kunci yang sama untuk membuka catatan yang tersimpan.</li>
-            </ul>
+        <div class="hint">
+          Petunjuk:
+          <ul>
+            <li>Tulis catatan Anda di kotak yang tersedia.</li>
+            <li>Masukkan kunci enkripsi yang mudah diingat namun aman.</li>
+            <li>
+              Gunakan kunci yang sama untuk membuka catatan yang tersimpan.
+            </li>
+          </ul>
         </div>
-        <textarea id="note" placeholder="Tulis catatan Anda di sini..."></textarea>
-        <input type="password" id="encryptionKey" placeholder="Masukkan kunci enkripsi" />
-        <button onclick="saveNote()">Simpan Catatan</button>
-        <button onclick="loadNote()">Buka Catatan</button>
-        <div id="decryptedOutput" class="output"></div>
+      </div>
+
+      <div class="container">
+        <div class="column">
+          <h2>Enkripsi Catatan</h2>
+          <textarea
+            id="note"
+            placeholder="Tulis catatan Anda di sini..."
+          ></textarea>
+          <input
+            type="password"
+            id="encryptionKey"
+            placeholder="Masukkan kunci enkripsi"
+          />
+          <button onclick="encryptAndSave()">Enkripsi & Simpan</button>
+        </div>
+        <div class="column">
+          <h2>Daftar Catatan</h2>
+          <div id="noteList"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="passwordModal" class="modal">
+      <div class="modal-content">
+        <h3>Masukkan Password</h3>
+        <input
+          type="password"
+          id="modalPassword"
+          placeholder="Masukkan kunci enkripsi"
+        />
+        <button onclick="confirmPassword()">Konfirmasi</button>
+      </div>
     </div>
 
     <script>
-        function encrypt(text, key) {
-            return btoa(unescape(encodeURIComponent(key + text)));
+      let currentNoteCode = null;
+
+      function encrypt(text, key) {
+        return btoa(unescape(encodeURIComponent(key + text)));
+      }
+
+      function decrypt(encryptedText, key) {
+        const decoded = decodeURIComponent(escape(atob(encryptedText)));
+        return decoded.startsWith(key) ? decoded.slice(key.length) : null;
+      }
+
+      function generateNoteCode() {
+        const now = new Date();
+        return `ENKR${now.getFullYear()}${String(now.getMonth() + 1).padStart(
+          2,
+          "0"
+        )}${String(now.getDate()).padStart(2, "0")}${String(
+          now.getHours()
+        ).padStart(2, "0")}${String(now.getMinutes()).padStart(2, "0")}`;
+      }
+
+      function encryptAndSave() {
+        const note = document.getElementById("note").value;
+        const key = document.getElementById("encryptionKey").value;
+
+        if (!note || !key) {
+          alert("Catatan dan kunci enkripsi harus diisi!");
+          return;
         }
 
-        function decrypt(encryptedText, key) {
-            const decoded = decodeURIComponent(escape(atob(encryptedText)));
-            return decoded.startsWith(key) ? decoded.slice(key.length) : null;
+        const encryptedNote = encrypt(note, key);
+        const noteCode = generateNoteCode();
+        localStorage.setItem(noteCode, encryptedNote);
+
+        const noteList = document.getElementById("noteList");
+        const noteItem = document.createElement("div");
+        noteItem.className = "note-item";
+        noteItem.innerHTML = `
+                <div class="note-code">${noteCode}</div>
+                <button onclick="showPasswordModal('${noteCode}')">Buka Catatan</button>
+                <div id="${noteCode}-content" class="output" style="display: none;"></div>
+            `;
+        noteList.appendChild(noteItem);
+
+        document.getElementById("note").value = "";
+        document.getElementById("encryptionKey").value = "";
+      }
+
+      function showPasswordModal(noteCode) {
+        currentNoteCode = noteCode;
+        document.getElementById("passwordModal").style.display = "flex";
+      }
+
+      function confirmPassword() {
+        const key = document.getElementById("modalPassword").value;
+        const encryptedNote = localStorage.getItem(currentNoteCode);
+        const decryptedNote = decrypt(encryptedNote, key);
+
+        const contentDiv = document.getElementById(
+          `${currentNoteCode}-content`
+        );
+        const modal = document.getElementById("passwordModal");
+
+        if (decryptedNote === null) {
+          alert("Kunci enkripsi salah!");
+          return;
         }
 
-        function saveNote() {
-            const note = document.getElementById('note').value;
-            const key = document.getElementById('encryptionKey').value;
-
-            if (!note || !key) {
-                alert('Catatan dan kunci enkripsi harus diisi!');
-                return;
-            }
-
-            const encryptedNote = encrypt(note, key);
-            localStorage.setItem('encryptedNote', encryptedNote);
-            alert('Catatan berhasil disimpan!');
-            document.getElementById('note').value = ""; // Reset note input
-        }
-
-        function loadNote() {
-            const encryptedNote = localStorage.getItem('encryptedNote');
-            const key = document.getElementById('encryptionKey').value;
-
-            if (!encryptedNote) {
-                alert('Tidak ada catatan tersimpan!');
-                return;
-            }
-
-            if (!key) {
-                alert('Masukkan kunci enkripsi untuk membuka catatan!');
-                return;
-            }
-
-            const decryptedNote = decrypt(encryptedNote, key);
-
-            if (decryptedNote === null) {
-                alert('Kunci enkripsi salah!');
-            } else {
-                document.getElementById('decryptedOutput').textContent = decryptedNote;
-            }
-        }
+        alert("Catatan berhasil dibuka!");
+        contentDiv.style.display = "block";
+        contentDiv.textContent = `Catatan: ${decryptedNote}`;
+        modal.style.display = "none";
+        document.getElementById("modalPassword").value = "";
+      }
     </script>
-</body>
+  </body>
 </html>
